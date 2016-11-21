@@ -1,0 +1,14 @@
+b67867,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751675,063e2e,200
+063e2e,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751675,,500
+ea109d,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751865,f4ef1a,200
+f4ef1a,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751865,,500
+6a50e6,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751901,b5953e,200
+b5953e,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751901,,500
+1af373,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751926,f8e570,200
+f8e570,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479751926,,500
+699b50,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479752266,198a5b,200
+198a5b,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479752266,,500
+b67d6c,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479752279,f49eac,200
+f49eac,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479752279,,500
+a2f242,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479752294,b477cb,200
+b477cb,::1,GET,http://localhost:8080/app_dev.php/test/init_testing_data,1479752295,,500
