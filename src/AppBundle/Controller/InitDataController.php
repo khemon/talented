@@ -23,9 +23,10 @@ class InitDataController extends Controller
         $generator = Factory::create();
         $entityManager = $this->getDoctrine()->getManager();
         dump($generator);
+        dump($entityManager);
         //Mapping it to Doctrine
         $populator = new Populator($generator, $entityManager);
-        $populator->addEntity('TUser',10);
+        $populator->addEntity('AppBundle\Entity\TUser',10);
         $insertedPk = $populator->execute();
 
         //return new JsonResponse($data = null, $status = 200, $headers = array(), $json = false);
