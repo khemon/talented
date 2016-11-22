@@ -19,17 +19,19 @@ class InitDataController extends Controller
      */
     public function createTestingDataAction()
     {
-        //Init Faker
-        $generator = Factory::create();
+        //Init Faker en Francais
+        $generator = Factory::create('fr_FR');
         $entityManager = $this->getDoctrine()->getManager();
-        dump($generator);
-        dump($entityManager);
         //Mapping it to Doctrine
         $populator = new Populator($generator, $entityManager);
-        $populator->addEntity('AppBundle\Entity\TUser',10);
+        $populator->addEntity('AppBundle\Entity\TUser', 10);
         $insertedPk = $populator->execute();
 
-        //return new JsonResponse($data = null, $status = 200, $headers = array(), $json = false);
-        return new JsonResponse(array('message' => 'Db populated.'));
+        return new JsonResponse(
+          array(
+            'message'       => 'Db populated.',
+            'primary_keys'  => $insertedPk
+          )
+        );
     }
 }

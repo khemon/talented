@@ -69,9 +69,9 @@ class TUser
     private $address;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="id", type="string", length=45)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -274,7 +274,7 @@ class TUser
     /**
      * Get id
      *
-     * @return string
+     * @return integer
      */
     public function getId()
     {
