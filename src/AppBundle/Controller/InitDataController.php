@@ -25,7 +25,7 @@ class InitDataController extends Controller
         //Mapping it to Doctrine
         $populator = new Populator($generator, $entityManager);
         $populator->addEntity('AppBundle\Entity\TUser', 10,
-          array('password' => $generator->unique()->regexify('[A-Za-z0-9%+-@]{10}'))
+          array('password' => function() use ($generator) { return $generator->password(); })
         );
         $insertedPk = $populator->execute();
 
