@@ -26,8 +26,7 @@ class InitDataController extends Controller
         $populator = new Populator($generator, $entityManager);
         $populator->addEntity(TUser::class, 10,
           array(
-            'password' => function() use ($generator) { return $generator->regexify('[A-Za-z0-9_@%!]{8}'); },
-            'createTime' => null
+            'password' => function() use ($generator) { return $generator->regexify('[A-Za-z0-9_@%!]{8}'); }
           )
         );
         $insertedPk = $populator->execute();
