@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Faker\Factory;
 use Faker\ORM\Doctrine\Populator;
 
-use AppBundle\Entity\TUser;
+use AppBundle\Entity\TUser as TUser;
 
 class InitDataController extends Controller
 {
@@ -24,8 +24,11 @@ class InitDataController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         //Mapping it to Doctrine
         $populator = new Populator($generator, $entityManager);
-        $populator->addEntity('AppBundle\Entity\TUser', 10,
-          array('password' => function() use ($generator) { return $generator->password(); })
+        $populator->addEntity(TUser::class, 10,
+          array(
+            'password' => function() use ($generator) { return $generator->regexify('[A-Za-z0-9_@%!]{8}'); },
+            'createTime' => null
+          )
         );
         $insertedPk = $populator->execute();
 
