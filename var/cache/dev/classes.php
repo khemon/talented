@@ -3499,11 +3499,11 @@ namespace
 {
 class Twig_Environment
 {
-const VERSION ='1.28.1';
-const VERSION_ID = 12801;
+const VERSION ='1.28.2';
+const VERSION_ID = 12802;
 const MAJOR_VERSION = 1;
 const MINOR_VERSION = 28;
-const RELEASE_VERSION = 1;
+const RELEASE_VERSION = 2;
 const EXTRA_VERSION ='';
 protected $charset;
 protected $loader;
@@ -5563,6 +5563,7 @@ $methods[] = $refMethod->name;
 } else {
 $methods = get_class_methods($object);
 }
+sort($methods);
 $cache = array();
 foreach ($methods as $method) {
 $cache[$method] = $method;
@@ -5621,7 +5622,16 @@ return;
 throw $e;
 }
 if ($object instanceof Twig_TemplateInterface) {
-@trigger_error('Using the dot notation on an instance of '.__CLASS__.' is deprecated since version 1.28 and won\'t be supported anymore in 2.0.', E_USER_DEPRECATED);
+$self = $object->getTemplateName() === $this->getTemplateName();
+$message = sprintf('Calling "%s" on template "%s" from template "%s" is deprecated since version 1.28 and won\'t be supported anymore in 2.0.', $method, $object->getTemplateName(), $this->getTemplateName());
+if ('renderBlock'=== $method ||'displayBlock'=== $method) {
+$message .= sprintf(' Use block("%s"%s) instead).', $arguments[0], $self ?'':', template');
+} elseif ('hasBlock'=== $method) {
+$message .= sprintf(' Use "block("%s"%s) is defined" instead).', $arguments[0], $self ?'':', template');
+} elseif ('render'=== $method ||'display'=== $method) {
+$message .= sprintf(' Use include("%s") instead).', $object->getTemplateName());
+}
+@trigger_error($message, E_USER_DEPRECATED);
 return $ret ===''?'': new Twig_Markup($ret, $this->env->getCharset());
 }
 return $ret;
@@ -5674,12 +5684,12 @@ return'NaN';
 }
 return $data;
 }
-if (is_array($data) || $data instanceof \Traversable) {
+if (is_array($data)) {
 $normalized = array();
 $count = 1;
 foreach ($data as $key => $value) {
 if ($count++ >= 1000) {
-$normalized['...'] ='Over 1000 items, aborting normalization';
+$normalized['...'] ='Over 1000 items ('.count($data).' total), aborting normalization';
 break;
 }
 $normalized[$key] = $this->normalize($value);
@@ -5871,6 +5881,9 @@ foreach ($vars as $var => $val) {
 if (false !== strpos($output,'%'.$var.'%')) {
 $output = str_replace('%'.$var.'%', $this->stringify($val), $output);
 }
+}
+if (false !== strpos($output,'%')) {
+$output = preg_replace('/%(?:extra|context)\..+?%/','', $output);
 }
 return $output;
 }
@@ -6114,10 +6127,14 @@ throw new \UnexpectedValueException(sprintf('The stream or file "%s" could not b
 if ($this->useLocking) {
 flock($this->stream, LOCK_EX);
 }
-fwrite($this->stream, (string) $record['formatted']);
+$this->streamWrite($this->stream, $record);
 if ($this->useLocking) {
 flock($this->stream, LOCK_UN);
 }
+}
+protected function streamWrite($stream, array $record)
+{
+fwrite($stream, (string) $record['formatted']);
 }
 private function customErrorHandler($code, $msg)
 {
@@ -6334,11 +6351,11 @@ public function clear()
 $this->records = array();
 $this->recordsByLevel = array();
 }
-protected function hasRecordRecords($level)
+public function hasRecords($level)
 {
 return isset($this->recordsByLevel[$level]);
 }
-protected function hasRecord($record, $level)
+public function hasRecord($record, $level)
 {
 if (is_array($record)) {
 $record = $record['message'];
@@ -6382,7 +6399,7 @@ $this->records[] = $record;
 public function __call($method, $args)
 {
 if (preg_match('/(.*)(Debug|Info|Notice|Warning|Error|Critical|Alert|Emergency)(.*)/', $method, $matches) > 0) {
-$genericMethod = $matches[1] .'Record'. $matches[3];
+$genericMethod = $matches[1] . ('Records'!== $matches[3] ?'Record':'') . $matches[3];
 $level = constant('Monolog\Logger::'. strtoupper($matches[2]));
 if (method_exists($this, $genericMethod)) {
 $args[] = $level;
@@ -6509,7 +6526,7 @@ return false;
 if (!static::$timezone) {
 static::$timezone = new \DateTimeZone(date_default_timezone_get() ?:'UTC');
 }
-if ($this->microsecondTimestamps) {
+if ($this->microsecondTimestamps && PHP_VERSION_ID < 70100) {
 $ts = \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)), static::$timezone);
 } else {
 $ts = new \DateTime(null, static::$timezone);
@@ -7312,6 +7329,7 @@ if (!isset($this->managers[$name])) {
 throw new \InvalidArgumentException(sprintf('Doctrine %s Manager named "%s" does not exist.', $this->name, $name));
 }
 $this->resetService($this->managers[$name]);
+return $this->getManager($name);
 }
 }
 }

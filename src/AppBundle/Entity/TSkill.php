@@ -47,7 +47,7 @@ class TSkill
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -71,7 +71,7 @@ class TSkill
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 

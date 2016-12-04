@@ -52,7 +52,7 @@ class TTalent
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -76,7 +76,7 @@ class TTalent
     public function setId($id)
     {
         $this->id = $id;
-    
+
         return $this;
     }
 
@@ -100,7 +100,7 @@ class TTalent
     public function setIdUser(\AppBundle\Entity\TUser $idUser)
     {
         $this->idUser = $idUser;
-    
+
         return $this;
     }
 

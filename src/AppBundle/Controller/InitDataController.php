@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+//use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 use Faker\Factory;
 use Faker\ORM\Doctrine\Populator;
@@ -29,13 +30,15 @@ class InitDataController extends Controller
             'password' => function() use ($generator) { return $generator->regexify('[A-Za-z0-9_@%!]{8}'); }
           )
         );
-        $insertedPk = $populator->execute();
 
-        return new JsonResponse(
-          array(
-            'message'       => 'Db populated.',
-            'primary_keys'  => $insertedPk
-          )
-        );
+        $insertedPk = $populator->execute();
+        $data =
+            array(  'data' =>
+                array(  'message'       => 'Db populated.',
+                        'primary_keys'  => $insertedPk)
+            );;
+
+        dump($data);
+        return new JsonResponse($data);
     }
 }

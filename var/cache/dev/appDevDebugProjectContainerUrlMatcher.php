@@ -100,6 +100,19 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        if (0 === strpos($pathinfo, '/log')) {
+            // login
+            if ($pathinfo === '/login') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AuthController::loginAction',  '_route' => 'login',);
+            }
+
+            // logout
+            if ($pathinfo === '/logout') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AuthController::logoutAction',  '_route' => 'logout',);
+            }
+
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
@@ -112,6 +125,19 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         // creating_testing_data
         if ($pathinfo === '/test/init_testing_data') {
             return array (  '_controller' => 'AppBundle\\Controller\\InitDataController::createTestingDataAction',  '_route' => 'creating_testing_data',);
+        }
+
+        if (0 === strpos($pathinfo, '/users/get')) {
+            // user_find_all
+            if ($pathinfo === '/users/getAllUsers') {
+                return array (  '_controller' => 'AppBundle\\Controller\\UserController::getAllUsersAction',  '_route' => 'user_find_all',);
+            }
+
+            // user_find_id
+            if (0 === strpos($pathinfo, '/users/getUserById') && preg_match('#^/users/getUserById/(?P<idUser>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_find_id')), array (  '_controller' => 'AppBundle\\Controller\\UserController::getUserByIdAction',));
+            }
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
