@@ -4,60 +4,43 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\View\View;
 
-class UserController extends Controller
+use AppBundle\Entity\TUser as TUser;
+
+class UserController extends FOSRestController
 {
     /**
-     * @Route("/users/getAllUsers", name="user_find_all")
+     * @Rest\Get("/user")
      */
     public function getAllUsersAction()
     {
         $listUsers = $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('AppBundle:TUser')
-                    ->findAll();
+                          ->getRepository('AppBundle:TUser')
+                          ->findAll();
 
-        $finalListUsers = array();
-
-        foreach($listUsers as $user) {
-            $finalListUsers[$user->getId()] = $user->getUserAsTable();
+        if ($listUsers === null) {
+          return new View("Aucun user en base de donnees.", Response::HTTP_NOT_FOUND);
         }
-
-        return new JsonResponse(
-            array(
-                'data' => $finalListUsers
-            )
-        );
-
-        /*dump($listUsers);
-
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);*/
+        return $listUsers;
     }
 
     /**
-     * @Route("/users/getUserById/{idUser}", name="user_find_id" , requirements={"idUser": "\d+"})
+     * @Rest\Get("/user/{userId}")
      */
-    public function getUserByIdAction($idUser)
+    public function getUserByIdAction($userId)
     {
         $user = $this->getDoctrine()
-                     ->getManager()
                      ->getRepository('AppBundle:TUser')
-                     ->find($idUser);
+                     ->find($userId);
 
-        return new JsonResponse(
-            array(
-                'data' => $user->getUserAsTable()
-            )
-        );
-
-        /*dump($user);
-
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);*/
+        if ($user === null) {
+          return new View("Aucun user existant pour l'id $userId.", Response::HTTP_NOT_FOUND);
+        }
+        return $user;
     }
 }

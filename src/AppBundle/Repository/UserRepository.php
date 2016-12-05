@@ -12,5 +12,7 @@ use Doctrine\ORM\EntityRepository as EntityRepository
  */
 class UserRepository extends EntityRepository
 {
-  
+    public function getAllUsersSortByName() {
+        $em = $this->getEntityManager();
+    }
 }

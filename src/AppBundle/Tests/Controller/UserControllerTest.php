@@ -10,14 +10,14 @@ class UserControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/getAllUsers');
+        $crawler = $client->request('GET', '/users/getAllUsers');
     }
 
     public function testGetuserbyid()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/getUserById');
+        $crawler = $client->request('GET', '/users/getUserById/{userId}');
     }
 
 }
