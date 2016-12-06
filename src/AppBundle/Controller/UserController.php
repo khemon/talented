@@ -26,7 +26,8 @@ class UserController extends FOSRestController
         if ($listUsers === null) {
           return new View("Aucun user en base de donnees.", Response::HTTP_NOT_FOUND);
         }
-        return $listUsers;
+
+        return array("data" => $listUsers);
     }
 
     /**
@@ -41,6 +42,6 @@ class UserController extends FOSRestController
         if ($user === null) {
           return new View("Aucun user existant pour l'id $userId.", Response::HTTP_NOT_FOUND);
         }
-        return $user;
+        return array("data" => $user);
     }
 }
