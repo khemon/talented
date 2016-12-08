@@ -44,4 +44,8 @@ class UserController extends FOSRestController
         }
         return array("data" => $user);
     }
+
+    public function notifyUser(TUser $user) {
+    }
+
 }

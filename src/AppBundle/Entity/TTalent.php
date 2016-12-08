@@ -7,11 +7,18 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TTalent
  *
- * @ORM\Table(name="t_talent", indexes={@ORM\Index(name="fk_id_user_idx", columns={"id_user"})})
+ * @ORM\Table(name="t_talent")
  * @ORM\Entity
  */
 class TTalent
 {
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=60, nullable=false)
+     */
+    private $name;
+
     /**
      * @var string
      *
@@ -24,23 +31,49 @@ class TTalent
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \AppBundle\Entity\TUser
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\TUser")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     * })
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TUser", mappedBy="idTalent")
      */
     private $idUser;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idUser = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return TTalent
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * Set description
@@ -52,7 +85,7 @@ class TTalent
     public function setDescription($description)
     {
         $this->description = $description;
-
+    
         return $this;
     }
 
@@ -67,20 +100,6 @@ class TTalent
     }
 
     /**
-     * Set id
-     *
-     * @param integer $id
-     *
-     * @return TTalent
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * Get id
      *
      * @return integer
@@ -91,23 +110,33 @@ class TTalent
     }
 
     /**
-     * Set idUser
+     * Add idUser
      *
      * @param \AppBundle\Entity\TUser $idUser
      *
      * @return TTalent
      */
-    public function setIdUser(\AppBundle\Entity\TUser $idUser)
+    public function addIdUser(\AppBundle\Entity\TUser $idUser)
     {
-        $this->idUser = $idUser;
-
+        $this->idUser[] = $idUser;
+    
         return $this;
+    }
+
+    /**
+     * Remove idUser
+     *
+     * @param \AppBundle\Entity\TUser $idUser
+     */
+    public function removeIdUser(\AppBundle\Entity\TUser $idUser)
+    {
+        $this->idUser->removeElement($idUser);
     }
 
     /**
      * Get idUser
      *
-     * @return \AppBundle\Entity\TUser
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getIdUser()
     {

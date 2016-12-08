@@ -77,6 +77,28 @@ class TUser
      */
     private $id;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TTalent", inversedBy="idUser")
+     * @ORM\JoinTable(name="t_usertalent",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_talent", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $idTalent;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idTalent = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -89,7 +111,7 @@ class TUser
     public function setUsername($username)
     {
         $this->username = $username;
-
+    
         return $this;
     }
 
@@ -113,7 +135,7 @@ class TUser
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
+    
         return $this;
     }
 
@@ -137,7 +159,7 @@ class TUser
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-
+    
         return $this;
     }
 
@@ -161,7 +183,7 @@ class TUser
     public function setEmail($email)
     {
         $this->email = $email;
-
+    
         return $this;
     }
 
@@ -185,7 +207,7 @@ class TUser
     public function setPassword($password)
     {
         $this->password = $password;
-
+    
         return $this;
     }
 
@@ -209,7 +231,7 @@ class TUser
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
-
+    
         return $this;
     }
 
@@ -233,7 +255,7 @@ class TUser
     public function setCreateTime($createTime)
     {
         $this->createTime = $createTime;
-
+    
         return $this;
     }
 
@@ -257,7 +279,7 @@ class TUser
     public function setAddress($address)
     {
         $this->address = $address;
-
+    
         return $this;
     }
 
@@ -281,16 +303,37 @@ class TUser
         return $this->id;
     }
 
-    public function getUserAsTable() {
-        return array(
-            "id"            => $this->getId(),
-            "username"      => $this->getUsername(),
-            "firstname"     => $this->getFirstName(),
-            "lastname"      => $this->getLastName(),
-            "email"         => $this->getEmail(),
-            "birthDate"     => $this->getBirthDate(),
-            "createTime"    => $this->getCreateTime(),
-            "address"       => $this->getAddress()
-        );
+    /**
+     * Add idTalent
+     *
+     * @param \AppBundle\Entity\TTalent $idTalent
+     *
+     * @return TUser
+     */
+    public function addIdTalent(\AppBundle\Entity\TTalent $idTalent)
+    {
+        $this->idTalent[] = $idTalent;
+    
+        return $this;
+    }
+
+    /**
+     * Remove idTalent
+     *
+     * @param \AppBundle\Entity\TTalent $idTalent
+     */
+    public function removeIdTalent(\AppBundle\Entity\TTalent $idTalent)
+    {
+        $this->idTalent->removeElement($idTalent);
+    }
+
+    /**
+     * Get idTalent
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdTalent()
+    {
+        return $this->idTalent;
     }
 }
