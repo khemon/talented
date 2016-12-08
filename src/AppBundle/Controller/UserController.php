@@ -47,5 +47,4 @@ class UserController extends FOSRestController
 
     public function notifyUser(TUser $user) {
     }
-
 }

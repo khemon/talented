@@ -13,7 +13,7 @@ use FOS\RestBundle\View\View;
 use AppBundle\Entity\TUser as TUser;
 use AppBundle\Entity\TTalent as TTalent;
 
-class TalentController extends Controller
+class TalentController extends FOSRestController
 {
    /**
     * @Rest\Get("/talent")
@@ -36,5 +36,14 @@ class TalentController extends Controller
      */
     public function getTalentUsersAction($talentId)
     {
+        $talent = $this->getDoctrine()
+                      ->getRepository('AppBundle:TTalent')
+                      ->find($talentId);
+
+        if ($talent === null) {
+          return new View("Aucun talent trouve avec l'id $talentId.", Response::HTTP_NOT_FOUND);
+        }
+
+        return array("data" => $talent->getIdUser());
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="AppBundle\Entity\TUser" table="t_user">
+  <entity name="AppBundle\Entity\TUser" table="t_user" repository-class="AppBundle\Repository\UserRepository">
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
@@ -41,7 +41,7 @@
       </options>
     </field>
     <many-to-many field="idTalent" target-entity="TTalent" inversed-by="idUser" fetch="LAZY">
-      <join-table name="t_userTalent">
+      <join-table name="t_user_talent">
         <join-columns>
           <join-column name="id_user" referenced-column-name="id"/>
         </join-columns>
