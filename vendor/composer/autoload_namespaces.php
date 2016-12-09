@@ -21,4 +21,8 @@ return array(
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
+    'CrEOF\\Spatial' => array($vendorDir . '/creof/doctrine2-spatial/lib'),
+    'CrEOF\\Geo\\WKT' => array($vendorDir . '/creof/wkt-parser/lib'),
+    'CrEOF\\Geo\\WKB' => array($vendorDir . '/creof/wkb-parser/lib'),
+    'CrEOF\\Geo\\String' => array($vendorDir . '/creof/geo-parser/lib'),
 );

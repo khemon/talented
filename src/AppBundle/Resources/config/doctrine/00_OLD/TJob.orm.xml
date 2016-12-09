@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TJob" repository_class="AppBundle\Repository\JobRepository" table="t_job">
+    <indexes>
+      <index name="fk_id_talent_job" columns="id_talent"/>
+      <index name="fk_id_user_job" columns="id_owner"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="address1" type="string" column="address1" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="address2" type="string" column="address2" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="address3" type="string" column="address3" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postalCode" type="string" column="postal_code" length="7" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="gpsPoint" type="point" column="gps_point" nullable="false"/>
+    <field name="date" type="datetime" column="date" nullable="false"/>
+    <field name="description" type="string" column="description" length="250" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idOwner" target-entity="TUser" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_owner" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTalent" target-entity="TTalent" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_talent" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

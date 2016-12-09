@@ -19,6 +19,7 @@ class UserController extends FOSRestController
      */
     public function getAllUsersAction()
     {
+        var_dump(get_class($this->getDoctrine()->getRepository(TUser::class)));exit;
         $listUsers = $this->getDoctrine()
                           ->getRepository('AppBundle:TUser')
                           ->findAll();

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TTalent
  *
  * @ORM\Table(name="t_talent")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TalentRepository")
  */
 class TTalent
 {
@@ -61,7 +61,7 @@ class TTalent
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -85,7 +85,7 @@ class TTalent
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -119,7 +119,7 @@ class TTalent
     public function addIdUser(\AppBundle\Entity\TUser $idUser)
     {
         $this->idUser[] = $idUser;
-    
+
         return $this;
     }
 

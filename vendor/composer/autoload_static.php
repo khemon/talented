@@ -285,6 +285,25 @@ class ComposerStaticInitc8d2b166072c570b7c11b21184345489
                 0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
             ),
         ),
+        'C' => 
+        array (
+            'CrEOF\\Spatial' => 
+            array (
+                0 => __DIR__ . '/..' . '/creof/doctrine2-spatial/lib',
+            ),
+            'CrEOF\\Geo\\WKT' => 
+            array (
+                0 => __DIR__ . '/..' . '/creof/wkt-parser/lib',
+            ),
+            'CrEOF\\Geo\\WKB' => 
+            array (
+                0 => __DIR__ . '/..' . '/creof/wkb-parser/lib',
+            ),
+            'CrEOF\\Geo\\String' => 
+            array (
+                0 => __DIR__ . '/..' . '/creof/geo-parser/lib',
+            ),
+        ),
     );
 
     public static $classMap = array (
