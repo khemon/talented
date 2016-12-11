@@ -62,6 +62,13 @@ class TUser
     private $createTime = 'CURRENT_TIMESTAMP';
 
     /**
+     * @var point
+     *
+     * @ORM\Column(name="location", type="point", nullable=false)
+     */
+    private $location;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=45, nullable=true)
@@ -267,6 +274,30 @@ class TUser
     public function getCreateTime()
     {
         return $this->createTime;
+    }
+
+    /**
+     * Set location
+     *
+     * @param point $location
+     *
+     * @return TUser
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return point
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 
     /**
