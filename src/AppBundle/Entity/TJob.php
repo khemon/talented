@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TJob
  *
- * @ORM\Table(name="t_job", indexes={@ORM\Index(name="fk_id_talent_job", columns={"id_talent"}), @ORM\Index(name="fk_id_user_job", columns={"id_owner"})})
+ * @ORM\Table(name="t_job", indexes={@ORM\Index(name="fk_id_talent_job", columns={"talent"}), @ORM\Index(name="fk_id_user_job", columns={"owner"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\JobRepository")
  */
 class TJob
@@ -43,9 +43,9 @@ class TJob
     /**
      * @var point
      *
-     * @ORM\Column(name="gps_point", type="point", nullable=false)
+     * @ORM\Column(name="location", type="point", nullable=false)
      */
-    private $gpsPoint;
+    private $location;
 
     /**
      * @var \DateTime
@@ -75,20 +75,20 @@ class TJob
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TUser")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_owner", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="owner", referencedColumnName="id")
      * })
      */
-    private $idOwner;
+    private $owner;
 
     /**
      * @var \AppBundle\Entity\TTalent
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TTalent")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_talent", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="talent", referencedColumnName="id")
      * })
      */
-    private $idTalent;
+    private $talent;
 
 
 
@@ -189,27 +189,27 @@ class TJob
     }
 
     /**
-     * Set gpsPoint
+     * Set location
      *
-     * @param point $gpsPoint
+     * @param point $location
      *
      * @return TJob
      */
-    public function setGpsPoint($gpsPoint)
+    public function setLocation($location)
     {
-        $this->gpsPoint = $gpsPoint;
+        $this->location = $location;
 
         return $this;
     }
 
     /**
-     * Get gpsPoint
+     * Get location
      *
      * @return point
      */
-    public function getGpsPoint()
+    public function getLocation()
     {
-        return $this->gpsPoint;
+        return $this->location;
     }
 
     /**
@@ -271,50 +271,50 @@ class TJob
     }
 
     /**
-     * Set idOwner
+     * Set owner
      *
-     * @param \AppBundle\Entity\TUser $idOwner
+     * @param \AppBundle\Entity\TUser $owner
      *
      * @return TJob
      */
-    public function setIdOwner(\AppBundle\Entity\TUser $idOwner = null)
+    public function setOwner(\AppBundle\Entity\TUser $owner = null)
     {
-        $this->idOwner = $idOwner;
+        $this->owner = $owner;
 
         return $this;
     }
 
     /**
-     * Get idOwner
+     * Get owner
      *
      * @return \AppBundle\Entity\TUser
      */
-    public function getIdOwner()
+    public function getOwner()
     {
-        return $this->idOwner;
+        return $this->owner;
     }
 
     /**
-     * Set idTalent
+     * Set talent
      *
-     * @param \AppBundle\Entity\TTalent $idTalent
+     * @param \AppBundle\Entity\TTalent $talent
      *
      * @return TJob
      */
-    public function setIdTalent(\AppBundle\Entity\TTalent $idTalent = null)
+    public function setTalent(\AppBundle\Entity\TTalent $talent = null)
     {
-        $this->idTalent = $idTalent;
+        $this->talent = $talent;
 
         return $this;
     }
 
     /**
-     * Get idTalent
+     * Get talent
      *
      * @return \AppBundle\Entity\TTalent
      */
-    public function getIdTalent()
+    public function getTalent()
     {
-        return $this->idTalent;
+        return $this->talent;
     }
 }
