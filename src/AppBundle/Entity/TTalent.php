@@ -38,16 +38,16 @@ class TTalent
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TUser", mappedBy="idTalent")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TUser", mappedBy="talent")
      */
-    private $idUser;
+    private $user;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idUser = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -110,36 +110,36 @@ class TTalent
     }
 
     /**
-     * Add idUser
+     * Add user
      *
-     * @param \AppBundle\Entity\TUser $idUser
+     * @param \AppBundle\Entity\TUser $user
      *
      * @return TTalent
      */
-    public function addIdUser(\AppBundle\Entity\TUser $idUser)
+    public function addUser(\AppBundle\Entity\TUser $user)
     {
-        $this->idUser[] = $idUser;
+        $this->user[] = $user;
 
         return $this;
     }
 
     /**
-     * Remove idUser
+     * Remove user
      *
-     * @param \AppBundle\Entity\TUser $idUser
+     * @param \AppBundle\Entity\TUser $user
      */
-    public function removeIdUser(\AppBundle\Entity\TUser $idUser)
+    public function removeUser(\AppBundle\Entity\TUser $user)
     {
-        $this->idUser->removeElement($idUser);
+        $this->user->removeElement($user);
     }
 
     /**
-     * Get idUser
+     * Get user
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdUser()
+    public function getUser()
     {
-        return $this->idUser;
+        return $this->user;
     }
 }

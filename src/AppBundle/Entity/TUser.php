@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TUser
  *
  * @ORM\Table(name="t_user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity
  */
 class TUser
 {
@@ -87,24 +87,24 @@ class TUser
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TTalent", inversedBy="idUser")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TTalent", inversedBy="user")
      * @ORM\JoinTable(name="t_user_talent",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="user", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_talent", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="talent", referencedColumnName="id")
      *   }
      * )
      */
-    private $idTalent;
+    private $talent;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idTalent = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->talent = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -118,7 +118,7 @@ class TUser
     public function setUsername($username)
     {
         $this->username = $username;
-
+    
         return $this;
     }
 
@@ -142,7 +142,7 @@ class TUser
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
+    
         return $this;
     }
 
@@ -166,7 +166,7 @@ class TUser
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-
+    
         return $this;
     }
 
@@ -190,7 +190,7 @@ class TUser
     public function setEmail($email)
     {
         $this->email = $email;
-
+    
         return $this;
     }
 
@@ -214,7 +214,7 @@ class TUser
     public function setPassword($password)
     {
         $this->password = $password;
-
+    
         return $this;
     }
 
@@ -238,7 +238,7 @@ class TUser
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
-
+    
         return $this;
     }
 
@@ -262,7 +262,7 @@ class TUser
     public function setCreateTime($createTime)
     {
         $this->createTime = $createTime;
-
+    
         return $this;
     }
 
@@ -286,7 +286,7 @@ class TUser
     public function setLocation($location)
     {
         $this->location = $location;
-
+    
         return $this;
     }
 
@@ -310,7 +310,7 @@ class TUser
     public function setAddress($address)
     {
         $this->address = $address;
-
+    
         return $this;
     }
 
@@ -335,36 +335,36 @@ class TUser
     }
 
     /**
-     * Add idTalent
+     * Add talent
      *
-     * @param \AppBundle\Entity\TTalent $idTalent
+     * @param \AppBundle\Entity\TTalent $talent
      *
      * @return TUser
      */
-    public function addIdTalent(\AppBundle\Entity\TTalent $idTalent)
+    public function addTalent(\AppBundle\Entity\TTalent $talent)
     {
-        $this->idTalent[] = $idTalent;
-
+        $this->talent[] = $talent;
+    
         return $this;
     }
 
     /**
-     * Remove idTalent
+     * Remove talent
      *
-     * @param \AppBundle\Entity\TTalent $idTalent
+     * @param \AppBundle\Entity\TTalent $talent
      */
-    public function removeIdTalent(\AppBundle\Entity\TTalent $idTalent)
+    public function removeTalent(\AppBundle\Entity\TTalent $talent)
     {
-        $this->idTalent->removeElement($idTalent);
+        $this->talent->removeElement($talent);
     }
 
     /**
-     * Get idTalent
+     * Get talent
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdTalent()
+    public function getTalent()
     {
-        return $this->idTalent;
+        return $this->talent;
     }
 }

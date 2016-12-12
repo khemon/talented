@@ -44,6 +44,6 @@ class TalentController extends FOSRestController
           return new View("Aucun talent trouve avec l'id $talentId.", Response::HTTP_NOT_FOUND);
         }
 
-        return array("data" => $talent->getIdUser());
+        return array("data" => $talent->getUser());
     }
 }
