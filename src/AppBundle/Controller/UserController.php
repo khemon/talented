@@ -15,9 +15,9 @@ use AppBundle\Entity\TUser as TUser;
 class UserController extends FOSRestController
 {
     /**
-     * @Rest\Get("/user")
+     * @Rest\Get("/users")
      */
-    public function getAllUsersAction()
+    public function getUsersAction()
     {
         $listUsers = $this->getDoctrine()
                           ->getRepository('AppBundle:TUser')
@@ -31,9 +31,9 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/user/{userId}")
+     * @Rest\Get("/users/{userId}")
      */
-    public function getUserByIdAction($userId)
+    public function getUserAction($userId)
     {
         $user = $this->getDoctrine()
                      ->getRepository('AppBundle:TUser')

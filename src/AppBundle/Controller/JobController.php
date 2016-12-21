@@ -31,13 +31,26 @@ class JobController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/job/add")
+     * @Rest\Get("/jobs")
+     */
+    public function getJobsAction() {
+        $listJobs = $this->getDoctrine()
+                         ->getRepository('AppBundle:TJob')
+                         ->findAll();
+
+        if ($listJobs === null) {
+          return new View("Aucun job en base de donnees.", Response::HTTP_NOT_FOUND);
+        }
+
+        return array("data" => $listJobs);
+    }
+
+    /**
+     * @Rest\Post("/job")
      */
     public function addJobAction()
     {
-        return $this->render('AppBundle:Job:add_job.html.twig', array(
-            // ...
-        ));
+        
     }
 
 }

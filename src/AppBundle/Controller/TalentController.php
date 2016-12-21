@@ -16,7 +16,7 @@ use AppBundle\Entity\TTalent as TTalent;
 class TalentController extends FOSRestController
 {
    /**
-    * @Rest\Get("/talent")
+    * @Rest\Get("/talents")
     */
     public function getTalentsAction()
     {
@@ -32,7 +32,7 @@ class TalentController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/talent/{talentId}/users")
+     * @Rest\Get("/talents/{talentId}/users")
      */
     public function getTalentUsersAction($talentId)
     {
