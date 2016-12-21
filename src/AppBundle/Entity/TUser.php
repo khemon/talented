@@ -87,24 +87,24 @@ class TUser
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TTalent", inversedBy="idUser")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TTalent", inversedBy="user")
      * @ORM\JoinTable(name="t_user_talent",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="user", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_talent", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="talent", referencedColumnName="id")
      *   }
      * )
      */
-    private $idTalent;
+    private $talent;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idTalent = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->talent = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -335,36 +335,36 @@ class TUser
     }
 
     /**
-     * Add idTalent
+     * Add talent
      *
-     * @param \AppBundle\Entity\TTalent $idTalent
+     * @param \AppBundle\Entity\TTalent $talent
      *
      * @return TUser
      */
-    public function addIdTalent(\AppBundle\Entity\TTalent $idTalent)
+    public function addTalent(\AppBundle\Entity\TTalent $talent)
     {
-        $this->idTalent[] = $idTalent;
+        $this->talent[] = $talent;
 
         return $this;
     }
 
     /**
-     * Remove idTalent
+     * Remove talent
      *
-     * @param \AppBundle\Entity\TTalent $idTalent
+     * @param \AppBundle\Entity\TTalent $talent
      */
-    public function removeIdTalent(\AppBundle\Entity\TTalent $idTalent)
+    public function removeTalent(\AppBundle\Entity\TTalent $talent)
     {
-        $this->idTalent->removeElement($idTalent);
+        $this->talent->removeElement($talent);
     }
 
     /**
-     * Get idTalent
+     * Get talent
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdTalent()
+    public function getTalent()
     {
-        return $this->idTalent;
+        return $this->talent;
     }
 }

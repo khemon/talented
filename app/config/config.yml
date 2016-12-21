@@ -61,7 +61,7 @@ doctrine:
         #     path:     "%database_path%"
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
+        # naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         dql:
             numeric_functions:
@@ -89,6 +89,7 @@ nelmio_cors:
 # FOSRest Configuration
 fos_rest:
     body_listener: true
+        #array_normalizer: fos_rest.normalizer.camel_keys
     format_listener:
         rules:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: false }
@@ -97,3 +98,8 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
+
+# JMSSerializerBundle
+services:
+  jms_serializer.naming_strategy:
+    class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'

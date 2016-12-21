@@ -17,6 +17,6 @@ class TalentRepository extends EntityRepository
      * @return Collection<AppBundle:TUser> Liste des utilisateurs
      */
     public function findAllUsersByTalent($talent) {
-        return $talent->getIdUser();
+        return $talent->getUser();
     }
 }
