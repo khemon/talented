@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TUser
  *
  * @ORM\Table(name="t_user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class TUser
 {
@@ -118,7 +118,7 @@ class TUser
     public function setUsername($username)
     {
         $this->username = $username;
-    
+
         return $this;
     }
 
@@ -142,7 +142,7 @@ class TUser
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-    
+
         return $this;
     }
 
@@ -166,7 +166,7 @@ class TUser
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-    
+
         return $this;
     }
 
@@ -190,7 +190,7 @@ class TUser
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
@@ -214,7 +214,7 @@ class TUser
     public function setPassword($password)
     {
         $this->password = $password;
-    
+
         return $this;
     }
 
@@ -238,7 +238,7 @@ class TUser
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
-    
+
         return $this;
     }
 
@@ -262,7 +262,7 @@ class TUser
     public function setCreateTime($createTime)
     {
         $this->createTime = $createTime;
-    
+
         return $this;
     }
 
@@ -286,7 +286,7 @@ class TUser
     public function setLocation($location)
     {
         $this->location = $location;
-    
+
         return $this;
     }
 
@@ -310,7 +310,7 @@ class TUser
     public function setAddress($address)
     {
         $this->address = $address;
-    
+
         return $this;
     }
 
@@ -344,7 +344,6 @@ class TUser
     public function addTalent(\AppBundle\Entity\TTalent $talent)
     {
         $this->talent[] = $talent;
-    
         return $this;
     }
 
