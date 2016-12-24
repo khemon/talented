@@ -103,3 +103,15 @@ fos_rest:
 services:
   jms_serializer.naming_strategy:
     class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'
+
+# JMS Serializer
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+          AppBundle:
+            namespace_prefix: "AppBundle"
+            path: "@AppBundle/Resources/config/serializer"
+          CrEOF:
+            namespace_prefix: "CrEOF\\Spatial\\PHP"
+            path: "@AppBundle/Resources/config/serializer"

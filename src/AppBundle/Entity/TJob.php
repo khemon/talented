@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type as Type;
 
 /**
  * TJob
@@ -44,6 +45,7 @@ class TJob
      * @var point
      *
      * @ORM\Column(name="location", type="point", nullable=false)
+     * @Type("CrEOF\Spatial\PHP\Types\Geometry\Point")
      */
     private $location;
 

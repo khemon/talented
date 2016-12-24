@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 
 use AppBundle\Entity\TJob as TJob;
+use AppBundle\Entity\TTalent as TTalent;
+use AppBundle\Entity\TUser as TUser;
 
 class JobController extends FOSRestController
 {
@@ -48,9 +50,34 @@ class JobController extends FOSRestController
     /**
      * @Rest\Post("/job")
      */
-    public function addJobAction()
+    public function addJobAction(Request $request)
     {
-        
+      $jobData = $request->getContent();
+
+      $serializer = $this->get('serializer');
+      $jobEntity = $serializer->deserialize($jobData, 'AppBundle\Entity\TJob','json');
+
+      //Récupération du Talent
+      $talentId = $request->request->get('talent_id');
+      $talent = $this->getDoctrine()
+                     ->getRepository('AppBundle:TTalent')
+                     ->find($talentId);
+
+      //Récupération du User (Owner du job)
+      $ownerId =  $request->request->get('owner_id');
+      $owner = $this->getDoctrine()
+                   ->getRepository('AppBundle:TUser')
+                   ->find($ownerId);
+
+      //Ajout des entites au job
+      $jobEntity->setTalent($talent);
+      $jobEntity->setOwner($owner);
+
+      // tells Doctrine you want to (eventually) save the Job (no queries yet)
+      $this->getDoctrine()->getEntityManager()->persist($jobEntity);
+
+      // actually executes the queries (i.e. the INSERT query)
+      $this->getDoctrine()->getEntityManager()->flush();
     }
 
 }
