@@ -1,7 +1,7 @@
 AppBundle\Entity\TJob:
     exclusion_policy: NONE
     properties:
-        location:
-            type: CrEOF\Spatial\PHP\Types\Geometry\Point
+        location :
+            type:  CrEOF\Spatial\PHP\Types\Geometry\Point
             exclude: false
             expose: true

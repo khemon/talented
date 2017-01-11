@@ -113,5 +113,5 @@ jms_serializer:
             namespace_prefix: "AppBundle"
             path: "@AppBundle/Resources/config/serializer"
           CrEOF:
-            namespace_prefix: "CrEOF\\Spatial\\PHP"
+            namespace_prefix: "CrEOF\\Spatial\\PHP\\Types"
             path: "@AppBundle/Resources/config/serializer"
