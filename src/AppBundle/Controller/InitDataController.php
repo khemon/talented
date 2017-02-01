@@ -21,27 +21,8 @@ class InitDataController extends Controller
         //Init Faker en Francais
         $generator = Factory::create('fr_FR');
         $entityManager = $this->getDoctrine()->getManager();
+
         //Mapping it to Doctrine
-        //Insertion des Talents
-        /*$talent = new TTalent();
-        $talent->setName('Ménage');
-        $talent->setDescription('Ménage');
-        $talent1 = new TTalent();
-        $talent1->setName('Déménagement');
-        $talent1->setDescription('Déménagement');
-        $talent2 = new TTalent();
-        $talent2->setName('Bricolage');
-        $talent2->setDescription('Bricolage');
-        $talent3 = new TTalent();
-        $talent3->setName('Livraison');
-        $talent3->setDescription('Livraison');
-        // tells Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($talent);
-        $entityManager->persist($talent1);
-        $entityManager->persist($talent2);
-        $entityManager->persist($talent3);
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();*/
         $populator = new Populator($generator, $entityManager);
         $populator->addEntity(TTalent::class,5,
             array('name' => function() use ($generator) { return $generator->randomElement($array = array ('Ménage',

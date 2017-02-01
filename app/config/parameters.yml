@@ -1,12 +1,22 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: rds-talenteddev.cvxmxo6dvzo2.us-east-1.rds.amazonaws.com
+    #AWS - Connection infos
+    #database_host: rds-talenteddev.cvxmxo6dvzo2.us-east-1.rds.amazonaws.com
+    #database_port: 3306
+    #database_user: admin
+    #database_name: talented-dev
+    #database_password: talented!123
+    #local
+    database_host: 127.0.0.1
     database_port: 3306
-    database_name: talented-dev
-    database_user: admin
-    database_password: talented!123
+    database_name: talented-db
+    database_user: root
+    database_password: admin
+
+    #Mailer
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
+
     secret: 6b313005b135b09ae299dcd5ab760492a6aee289
