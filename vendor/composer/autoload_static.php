@@ -62,6 +62,7 @@ class ComposerStaticInitc8d2b166072c570b7c11b21184345489
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'Faker\\' => 6,
             'FOS\\RestBundle\\' => 15,
         ),
@@ -171,6 +172,10 @@ class ComposerStaticInitc8d2b166072c570b7c11b21184345489
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Faker\\' => 
         array (

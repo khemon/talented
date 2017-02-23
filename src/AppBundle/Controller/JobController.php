@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\FOSRestController;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
@@ -14,7 +14,7 @@ use AppBundle\Entity\TJob as TJob;
 use AppBundle\Entity\TTalent as TTalent;
 use AppBundle\Entity\TUser as TUser;
 
-class JobController extends FOSRestController
+class JobController extends BaseApiController
 {
     /**
      * @Rest\Get("/jobs/active")

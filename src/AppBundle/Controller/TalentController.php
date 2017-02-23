@@ -13,7 +13,7 @@ use FOS\RestBundle\View\View;
 use AppBundle\Entity\TUser as TUser;
 use AppBundle\Entity\TTalent as TTalent;
 
-class TalentController extends FOSRestController
+class TalentController extends BaseApiController
 {
    /**
     * @Rest\Get("/talents")

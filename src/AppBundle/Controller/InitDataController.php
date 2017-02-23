@@ -11,6 +11,7 @@ use Faker\ORM\Doctrine\Populator;
 use AppBundle\Entity\TUser as TUser;
 use AppBundle\Entity\TTalent as TTalent;
 use AppBundle\Entity\TJob as TJob;
+
 class InitDataController extends Controller
 {
     /**
