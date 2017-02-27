@@ -52,6 +52,7 @@ class JobController extends BaseApiController
      */
     public function addJobAction(Request $request)
     {
+      $this->_checkToken($request);
       $jobData = $request->getContent();
 
       $serializer = $this->get('serializer');

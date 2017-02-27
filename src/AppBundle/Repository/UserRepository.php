@@ -13,6 +13,12 @@ use Doctrine\ORM\EntityRepository as EntityRepository;
 class UserRepository extends EntityRepository
 {
     public function getAllUsersSortByName() {
-        $em = $this->getEntityManager();
+        return $this->getEntityManager()
+                   ->createQuery('SELECT u FROM AppBundle:TUser u SORT BY username ASC')
+                   ->getResult();
+    }
+
+    public function getUserByLogin($login) {
+      return $this->findOneBy(array('username' => $login));
     }
 }
