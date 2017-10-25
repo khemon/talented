@@ -10,8 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 
-use AppBundle\Entity\TUser as TUser;
-use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AuthController extends BaseApiController
 {
@@ -31,12 +30,14 @@ class AuthController extends BaseApiController
 
         //If login not found
         if(!$user) {
-            return new View("Login inexistant !");
+            $data = array('messageErreur' => "Login inexistant !", 'statut' => 0);
+            return new JsonResponse($data);
         }
 
         //If password incorrect
         if($user->getPassword() != $password) {
-            return new View("Password incorrect !");
+            $data = array('messageErreur' => "Mot de passe incorrect !", 'statut' => 0);
+            return new JsonResponse($data);
         }
 
         //Create token
@@ -50,7 +51,8 @@ class AuthController extends BaseApiController
         $token = $this->_createToken($tokenData);
 
         //Return token
-        return $token;
+        $data = array('token' => $token, 'statut' => 1);
+        return new JsonResponse($data);
     }
 
     /**
