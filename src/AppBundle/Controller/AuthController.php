@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -10,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 
 use AppBundle\Entity\TUser as TUser;
+use Symfony\Component\Validator\Constraints\Date;
 
 class AuthController extends BaseApiController
 {
@@ -29,18 +31,20 @@ class AuthController extends BaseApiController
 
         //If login not found
         if(!$user) {
-          return new View("Login inexistant !");
+            return new View("Login inexistant !");
         }
 
         //If password incorrect
         if($user->getPassword() != $password) {
-          return new View("Password incorect !");
+            return new View("Password incorrect !");
         }
 
         //Create token
         $tokenData = array(
-          'username' => $user->getUsername(),
-          'id' => $user->getID(),
+            "username" => $user->getUsername(),
+            "id" => $user->getID(),
+            "exp" => time() + 60 * 60, //1 minute pour test
+            "role" => "user"
         );
 
         $token = $this->_createToken($tokenData);
@@ -48,6 +52,18 @@ class AuthController extends BaseApiController
         //Return token
         return $token;
     }
+
+    /**
+     * @Rest\Post("/auth/checkToken")
+     */
+    public function checkToken(Request $request) {
+        $token = $request->request->get('st');
+        if($token == null) {
+            return new View("Token manquant pour tester sa validité (Paramètre st)");
+        } else {
+            return $this->_checkToken($request);
+        }
+     }
 
     /**
      * @Rest\Post("/auth/logout")

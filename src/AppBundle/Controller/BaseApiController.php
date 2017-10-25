@@ -23,8 +23,8 @@ abstract class BaseApiController extends FOSRestController
            $decoded = JWT::decode($token, $key, array('HS256'));
          } catch (\Exception $e) {
            //Track issues
-           throw new AccessDeniedException('You must be logged in order to access this functionality.');
-           //throw $e;
+           //throw new AccessDeniedException('You must be logged in order to access this functionality.');
+           throw $e;
          }
          return $decoded;
       }

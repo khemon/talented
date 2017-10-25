@@ -47,6 +47,7 @@ class InitDataController extends Controller
             'location' => function() use ($generator) { return new Point(array( 'x' => $generator->longitude(48.800001,48.900001),'y' => $generator->latitude(2.240001,2.4199999)));}
         ));
         $insertedPk = $populator->execute();
+
         $data =
             array(  'data' =>
                 array(  'message'       => 'Db populated.',
